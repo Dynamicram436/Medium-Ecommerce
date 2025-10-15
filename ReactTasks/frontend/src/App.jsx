@@ -17,10 +17,10 @@ const Cart = lazy(() => import("./components/Cart"));
 const MainLayout = () => (
   <>
     <Helmet>
-      <title>My React App</title>
+      <title>Medium-Ecommerce</title>
       <meta
         name="description"
-        content="A React application with products and cart"
+        content="A Ecommerce application with products and cart"
       />
     </Helmet>
     <Navbar />
