@@ -19,8 +19,8 @@ const Products = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const res = await axios.get("https://api.escuelajs.co/api/v1/products");
-      setProducts(res.data);
+      const res = await axios.get("https://dummyjson.com/products");
+      setProducts(res.data.products);
     };  
     fetchProducts();
   }, []);
@@ -30,40 +30,39 @@ const Products = () => {
         Welcome {JSON.parse(localStorage.getItem("userData")).username} to the
         Products Page
       </h1> */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-8">
-        {products.map(({ id, title, price, slug, images, description }) => (
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {products.map(({ id, title, price, thumbnail, description, category }) => (
           <div
             key={id}
             className="bg-white border border-gray-200 rounded-xl shadow-md flex flex-col overflow-hidden transition-transform hover:scale-105 hover:shadow-lg"
           >
-            <div className="h-64 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
+            <div className="h-48 w-full bg-gray-100 flex items-center justify-center overflow-hidden">
               <img
-                src={images[0]}
+                src={thumbnail}
                 alt={title}
                 className="object-cover h-full w-full"
                 loading="lazy"
               />
             </div>
-            <div className="flex flex-col flex-1 p-5 space-y-2">
-              <h3 className="text-xl font-semibold text-gray-800 truncate">
+            <div className="flex flex-col flex-1 p-4 space-y-2">
+              <h3 className="text-lg font-semibold text-gray-800 truncate">
                 {title}
               </h3>
-              <p className="text-base text-indigo-600 font-bold">
+              <p className="text-sm text-indigo-600 font-bold">
                 Price: ${price}
               </p>
-              <p className="text-sm text-gray-400 truncate">Slug: {slug}</p>
+              <p className="text-xs text-gray-400 truncate">Category: {category}</p>
               <button
                 onClick={() =>
                   handleAddToCart({
                     id,
                     title,
                     price,
-                    slug,
-                    images,
+                    thumbnail,
                     description,
                   })
                 }
-                className="mt-4 w-full cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 shadow"
+                className="mt-3 w-full cursor-pointer bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 rounded-lg transition-colors duration-200 shadow"
               >
                 Add to Cart
               </button>
